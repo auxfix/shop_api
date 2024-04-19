@@ -4,7 +4,11 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './ent/users/user.entity'; 
+import { User } from './ent/users/users.entity';
+import { Product } from './ent/users/products.entity';
+import { Order } from './ent/users/orders.entity';
+import { OrderItem } from './ent/users/order.items.entity';
+import { Cart } from './ent/users/carts.entity'; 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
@@ -22,7 +26,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get("POSTGRES_USER"),
         password: configService.get("POSTGRES_PASSWORD"),
         database: configService.get("POSTGRES_DB"),
-        entities: [User],
+        entities: [User, Product, Order, OrderItem, Cart],
         synchronize: true,
       }),
     }),

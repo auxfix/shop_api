@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../ent/users/user.entity';
+import { User } from '../ent/users/users.entity';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +16,7 @@ export class UsersService {
 
   findOneByName(username: string): Promise<User | undefined> {
     return this.usersRepository.findOne({where:{
-        firstName: username,
+        username: username,
     }});
   }
 
