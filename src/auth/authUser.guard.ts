@@ -6,7 +6,7 @@ import { Request } from 'express';
 import { CanActivate, ExecutionContext } from '@nestjs/common';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthUserGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -20,6 +20,9 @@ export class AuthGuard implements CanActivate {
         token,
         { secret: jwtConstants.secret }
       );
+      if(payload.role !== 'user'){
+        throw new UnauthorizedException();
+      }
       request.user = payload;
     } catch {
       throw new UnauthorizedException();

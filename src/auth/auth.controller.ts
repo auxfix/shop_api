@@ -9,7 +9,8 @@ import {
     Request,
     UseGuards
   } from '@nestjs/common';
-  import { AuthGuard } from './auth.guard';
+  import { AuthUserGuard } from './authUser.guard';
+  import { AuthAdminGuard } from './authAdmin.guard';
   import { AuthService } from './auth.service';
   
   @Controller('auth')
@@ -22,9 +23,15 @@ import {
       return this.authService.signIn(signInDto.username, signInDto.password);
     }
   
-    @UseGuards(AuthGuard)
-    @Get('profile')
-    getProfile(@Request() req) {
+    @UseGuards(AuthUserGuard)
+    @Get('user-profile')
+    getUserProfile(@Request() req) {
+      return req.user;
+    }
+
+    @UseGuards(AuthAdminGuard)
+    @Get('admin-profile')
+    getAdminProfile(@Request() req) {
       return req.user;
     }
   }
