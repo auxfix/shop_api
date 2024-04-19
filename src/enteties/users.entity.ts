@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
-import { Cart } from './carts.entity';
 import { Order } from './orders.entity';
 
 @Entity('users')
@@ -21,9 +20,6 @@ export class User extends BaseEntity {
 
   @Column({ name: 'updated_at', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
-
-  @OneToMany(() => Cart, cart => cart.user)
-  carts: Cart[];
 
   @OneToMany(() => Order, order => order.user)
   orders: Order[];

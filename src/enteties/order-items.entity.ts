@@ -21,9 +21,6 @@ export class OrderItem extends BaseEntity {
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
-  @Column()
-  quantity: number;
-
   @Column({ name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
